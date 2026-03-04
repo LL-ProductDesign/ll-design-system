@@ -1,23 +1,97 @@
 import React from 'react';
 import { color, scale } from './tokens';
 
-// ─── Figma asset URLs (valid ~7 days) ─────────────────────────────────────────
-const ASSET = {
-  aiIndicator:     'https://www.figma.com/api/mcp/asset/36fccc07-87b6-4f1b-8f5b-073992c06db9',
-  trainerAvatar:   'https://www.figma.com/api/mcp/asset/d3d76a8d-028b-4f0c-9f10-b55de237e81c',
-  arrowLeft:       'https://www.figma.com/api/mcp/asset/a85548bd-c9f3-4e69-92bc-a67ad6ff1a53',
-  liveDot:         'https://www.figma.com/api/mcp/asset/26e4a95d-7c14-4790-9aa9-b1f8f38d26be',
-  pipCameraOffIcon:'https://www.figma.com/api/mcp/asset/51a6b6fd-b061-41b1-a5b6-1fdf0ea5c24b',
-  pipCameraOnBg:   'https://www.figma.com/api/mcp/asset/edf71262-c8ed-48c5-8de5-f5045e81e327',
+// ─── Photo asset URLs (Figma, valid ~7 days) ──────────────────────────────────
+// Note: only photos — all icons are inline SVGs below.
+const PHOTO = {
+  trainerAvatar:    'https://www.figma.com/api/mcp/asset/d3d76a8d-028b-4f0c-9f10-b55de237e81c',
+  pipCameraOnBg:    'https://www.figma.com/api/mcp/asset/edf71262-c8ed-48c5-8de5-f5045e81e327',
   pipCameraOnPerson:'https://www.figma.com/api/mcp/asset/8c7dd205-9b95-4370-8ccd-a095db73a038',
-  bgCameraOff:     'https://www.figma.com/api/mcp/asset/a4524848-946a-4a15-99ba-61b51031d559',
-  bgFirstQuestion: 'https://www.figma.com/api/mcp/asset/254c93a4-0519-4f65-a24d-8682a389792b',
-  btnCameraOff:    'https://www.figma.com/api/mcp/asset/d19cc357-9666-467c-96f5-c084580f1de1',
-  btnVolume:       'https://www.figma.com/api/mcp/asset/7ea270de-ae26-4c7b-b890-a1fdd68937b5',
-  btnMic:          'https://www.figma.com/api/mcp/asset/a9636ff6-8156-4635-b988-0389d60835fc',
-  btnEndCall:      'https://www.figma.com/api/mcp/asset/8c2a2358-ce88-47cd-a765-942f2d88754a',
-  btnCaptions:     'https://www.figma.com/api/mcp/asset/9c825716-503b-4ab0-9c82-6e089cd4ae38',
+  bgCameraOff:      'https://www.figma.com/api/mcp/asset/a4524848-946a-4a15-99ba-61b51031d559',
+  bgFirstQuestion:  'https://www.figma.com/api/mcp/asset/254c93a4-0519-4f65-a24d-8682a389792b',
 };
+
+// ─── Inline SVG icons (never expire) ─────────────────────────────────────────
+
+function IconAI({ size = 16, color: fill = '#fff' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill={fill} xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
+      <path d="M8 1.5 L9.1 6.2 L13.5 7.5 L9.1 8.8 L8 13.5 L6.9 8.8 L2.5 7.5 L6.9 6.2 Z" />
+      <circle cx="13" cy="3" r="1" />
+    </svg>
+  );
+}
+
+function IconArrowLeft({ size = 16, color: stroke = '#a6b4bb' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
+      <path d="M10 3 L5 8 L10 13" stroke={stroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconLiveDot({ size = 8 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 8 8" fill="#38a867" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
+      <circle cx="4" cy="4" r="4" />
+    </svg>
+  );
+}
+
+function IconCameraOff({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
+      <path d="M3 14.5 C3 15.3 3.7 16 4.5 16 H15.5 C16.3 16 17 15.3 17 14.5 V7.5 C17 6.7 16.3 6 15.5 6 H13 L11.5 4 H8.5 L7.8 5" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="10" cy="11" r="2.5" stroke="white" strokeWidth="1.4"/>
+      <line x1="2.5" y1="2.5" x2="17.5" y2="17.5" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IconVolume({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
+      <path d="M3 7.5 H6 L11 4 V16 L6 12.5 H3 Z" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      <path d="M13.5 7 C14.8 8.1 14.8 11.9 13.5 13" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+      <path d="M15.5 5 C17.5 6.8 17.5 13.2 15.5 15" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IconMicrophone({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
+      <rect x="7" y="2" width="6" height="9" rx="3" stroke="white" strokeWidth="1.4"/>
+      <path d="M4 10 C4 14.4 16 14.4 16 10" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="10" y1="15" x2="10" y2="18" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="7" y1="18" x2="13" y2="18" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IconEndCall({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
+      <path
+        d="M2.5 11.5 C5 6 15 6 17.5 11.5 L15 12.5 L13.5 11 C13.5 11 12 11.5 10 11.5 C8 11.5 6.5 11 6.5 11 L5 12.5 Z"
+        stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"
+        transform="rotate(135, 10, 10)"
+      />
+    </svg>
+  );
+}
+
+function IconCaptions({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
+      <rect x="2" y="4" width="16" height="12" rx="2" stroke="white" strokeWidth="1.4"/>
+      <line x1="5" y1="9" x2="11" y2="9" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="13" y1="9" x2="15" y2="9" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="5" y1="12" x2="9" y2="12" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="11" y1="12" x2="15" y2="12" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -89,12 +163,12 @@ function PictureInPicture({ cameraOn }: { cameraOn: boolean }) {
       {cameraOn ? (
         <>
           <img
-            src={ASSET.pipCameraOnBg}
+            src={PHOTO.pipCameraOnBg}
             alt=""
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
           />
           <img
-            src={ASSET.pipCameraOnPerson}
+            src={PHOTO.pipCameraOnPerson}
             alt=""
             style={{ position: 'absolute', width: '100%', top: '-65%', objectFit: 'cover' }}
           />
@@ -110,11 +184,10 @@ function PictureInPicture({ cameraOn }: { cameraOn: boolean }) {
             border: `2px solid ${color['bg-invert']}`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <img src={ASSET.pipCameraOffIcon} alt="Camera off" width={20} height="auto" style={{ display: 'block' }} />
+            <IconCameraOff size={20} />
           </div>
         </div>
       )}
-      {/* "You" label */}
       <div style={{
         ...S.badge(),
         position: 'absolute', bottom: 4, right: 4,
@@ -128,12 +201,13 @@ function PictureInPicture({ cameraOn }: { cameraOn: boolean }) {
 
 /** The floating control bar at the bottom of the call. */
 function ControlBar({ onEndCall }: { onEndCall?: () => void }) {
-  const btn = (icon: string, isRed = false): React.CSSProperties => ({
+  const btnStyle = (isRed = false): React.CSSProperties => ({
     width: 40, height: 40, borderRadius: 8,
     border: `1px solid ${isRed ? scale.red[500] : scale.blue[800]}`,
     background: isRed ? 'rgba(202,43,52,0.7)' : 'rgba(6,59,85,0.7)',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     cursor: 'pointer', flexShrink: 0,
+    padding: 0,
   });
 
   return (
@@ -146,29 +220,28 @@ function ControlBar({ onEndCall }: { onEndCall?: () => void }) {
       borderRadius: 16,
       flexShrink: 0,
     }}>
-      <button style={btn(ASSET.btnCameraOff)} title="Camera" aria-label="Toggle camera">
-        <img src={ASSET.btnCameraOff} alt="" width={20} height="auto" />
+      <button style={btnStyle()} title="Camera" aria-label="Toggle camera">
+        <IconCameraOff size={20} />
       </button>
-      <button style={btn(ASSET.btnVolume)} title="Audio" aria-label="Toggle audio">
-        <img src={ASSET.btnVolume} alt="" width={20} height="auto" />
+      <button style={btnStyle()} title="Audio" aria-label="Toggle audio">
+        <IconVolume size={20} />
       </button>
-      <button style={btn(ASSET.btnMic)} title="Microphone" aria-label="Toggle microphone">
-        <img src={ASSET.btnMic} alt="" width={20} height="auto" />
+      <button style={btnStyle()} title="Microphone" aria-label="Toggle microphone">
+        <IconMicrophone size={20} />
       </button>
-      <button style={btn(ASSET.btnEndCall, true)} title="End call" aria-label="End call" onClick={onEndCall}>
-        <img src={ASSET.btnEndCall} alt="" width={20} height="auto" />
+      <button style={btnStyle(true)} title="End call" aria-label="End call" onClick={onEndCall}>
+        <IconEndCall size={20} />
       </button>
-      {/* Divider */}
       <div style={{ width: 1, height: 28, background: scale.blue[700], flexShrink: 0, margin: '0 2px' }} />
-      <button style={btn(ASSET.btnCaptions)} title="Captions" aria-label="Toggle captions">
-        <img src={ASSET.btnCaptions} alt="" width={20} height="auto" />
+      <button style={btnStyle()} title="Captions" aria-label="Toggle captions">
+        <IconCaptions size={20} />
       </button>
     </div>
   );
 }
 
 /** Caption bubble shown when the trainer is speaking. */
-function Captions({ trainerName, text, aiIcon }: { trainerName: string; text: string; aiIcon: string }) {
+function Captions({ trainerName, text }: { trainerName: string; text: string }) {
   return (
     <div style={{
       width: '100%',
@@ -181,7 +254,7 @@ function Captions({ trainerName, text, aiIcon }: { trainerName: string; text: st
       alignItems: 'flex-start',
     }}>
       <div style={{ ...S.badge(), flexShrink: 0 }}>
-        <img src={aiIcon} alt="" width={12} height="auto" style={{ display: 'block' }} />
+        <IconAI size={12} />
         <span style={S.font(12, 400, 16, { color: '#fff' })}>{trainerName}</span>
       </div>
       <p style={S.font(16, 400, 22, { color: '#fff', margin: 0, flex: 1 })}>{text}</p>
@@ -202,8 +275,8 @@ export function AITrainer({
   onChangeTopic,
   onEndCall,
 }: AITrainerProps) {
-  const isReady = state === 'ready_to_start';
-  const isLive  = state !== 'ready_to_start';
+  const isReady    = state === 'ready_to_start';
+  const isLive     = state !== 'ready_to_start';
   const isSpeaking = state === 'first_ai_trainer_question';
 
   const outerBorder = isSpeaking
@@ -229,7 +302,7 @@ export function AITrainer({
       {/* ── Background video image (live states only) ── */}
       {isLive && (
         <img
-          src={isSpeaking ? ASSET.bgFirstQuestion : ASSET.bgCameraOff}
+          src={isSpeaking ? PHOTO.bgFirstQuestion : PHOTO.bgCameraOff}
           alt=""
           style={{
             position: 'absolute', inset: 0,
@@ -251,16 +324,15 @@ export function AITrainer({
       }}>
         {/* Left badges */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {/* Trainer name + (live) + (timer) row */}
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
             <div style={S.badge()}>
-              <img src={ASSET.aiIndicator} alt="" width={12} height="auto" style={{ display: 'block' }} />
+              <IconAI size={12} />
               <span style={S.font(12, 400, 16, { color: '#fff' })}>{trainerName}</span>
             </div>
             {isLive && (
               <>
                 <div style={S.badge()}>
-                  <img src={ASSET.liveDot} alt="" width={10} height="auto" style={{ display: 'block' }} />
+                  <IconLiveDot size={8} />
                   <span style={S.font(12, 400, 16, { color: '#fff', paddingLeft: 2 })}>Live</span>
                 </div>
                 <div style={{ ...S.badge(), padding: '4px 8px' }}>
@@ -269,25 +341,18 @@ export function AITrainer({
               </>
             )}
           </div>
-          {/* Topic badge */}
           <div style={{ ...S.badge(color['bg-brand']), padding: '4px 8px' }}>
-            <span style={S.font(10, 600, 14, {
-              color: '#fff',
-              letterSpacing: 0.5,
-              textTransform: 'uppercase',
-            })}>
+            <span style={S.font(10, 600, 14, { color: '#fff', letterSpacing: 0.5, textTransform: 'uppercase' })}>
               topic: {topic}
             </span>
           </div>
         </div>
 
-        {/* Right: Picture-in-picture */}
         <PictureInPicture cameraOn={isSpeaking} />
       </div>
 
       {/* ── Main content area ── */}
       {isReady ? (
-        /* ── Ready to start: centred hero ── */
         <div style={{
           position: 'relative', zIndex: 1,
           flex: 1,
@@ -302,7 +367,7 @@ export function AITrainer({
             boxShadow: `8px 17px 50px -12px rgba(14,163,236,0.4)`,
             overflow: 'hidden', flexShrink: 0,
           }}>
-            <img src={ASSET.trainerAvatar} alt={trainerName} width={96} height={96} style={{ display: 'block', objectFit: 'cover' }} />
+            <img src={PHOTO.trainerAvatar} alt={trainerName} width={96} height={96} style={{ display: 'block', objectFit: 'cover' }} />
           </div>
 
           {/* Copy */}
@@ -324,16 +389,15 @@ export function AITrainer({
               onClick={onStartCall}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
-                height: 40, padding: '12px 8px',
+                height: 40, padding: '0 16px',
                 background: color['bg-brand'],
-                color: '#fff',
                 border: 'none', borderRadius: 6,
                 boxShadow: '0 1px 2px 0 rgba(9,30,66,0.1)',
                 cursor: 'pointer',
                 ...S.font(14, 600, 18, { color: '#fff' }),
               }}
             >
-              <img src={ASSET.aiIndicator} alt="" width={14} height="auto" style={{ display: 'block' }} />
+              <IconAI size={14} />
               Start Video Call
             </button>
 
@@ -346,18 +410,17 @@ export function AITrainer({
                 background: 'none', border: 'none', cursor: 'pointer', padding: 0,
               }}
             >
-              <img src={ASSET.arrowLeft} alt="" width={16} height="auto" style={{ display: 'block' }} />
+              <IconArrowLeft size={16} />
               <span style={S.font(14, 400, 18, { color: scale.neutral[70] })}>Change Topic</span>
             </button>
           </div>
         </div>
       ) : (
-        /* ── Live call: bottom-docked controls ── */
         <div style={{
           position: 'relative', zIndex: 1,
           flex: 1, display: 'flex', flexDirection: 'column',
           justifyContent: 'flex-end', alignItems: 'center',
-          gap: 0, paddingBottom: 5,
+          paddingBottom: 5,
         }}>
           {/* Bottom gradient overlay */}
           <div style={{
@@ -373,18 +436,11 @@ export function AITrainer({
             display: 'flex', flexDirection: 'column',
             alignItems: 'center', gap: 16, width: '100%',
           }}>
-            {/* Captions (speaking state only) */}
             {isSpeaking && (
               <div style={{ width: '100%', padding: '0 96px' }}>
-                <Captions
-                  trainerName={trainerName}
-                  text={captionText!}
-                  aiIcon={ASSET.aiIndicator}
-                />
+                <Captions trainerName={trainerName} text={captionText!} />
               </div>
             )}
-
-            {/* Control bar */}
             <ControlBar onEndCall={onEndCall} />
           </div>
         </div>
