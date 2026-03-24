@@ -1,5 +1,5 @@
 import React from 'react';
-import { color, radius } from './tokens';
+import { color, radius, scale } from './tokens';
 
 export type AvatarSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type AvatarStatus = 'online' | 'away' | 'busy' | 'offline' | 'none';
@@ -51,7 +51,7 @@ const SIZES: Record<AvatarSize, {
 
 const STATUS_COLORS: Record<AvatarStatus, string> = {
   online:  color['bg-green'],
-  away:    '#ffbb0f',
+  away:    scale.yellow[500],
   busy:    color['text-error'],
   offline: color['text-disabled'],
   none:    'transparent',

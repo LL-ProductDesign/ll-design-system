@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { color } from './tokens';
+import { color, scale } from './tokens';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -76,7 +76,7 @@ function TabBase({ item, active, stretched, onClick }: TabBaseProps) {
       : color['text-secondary'];
 
   const underlineColor = isDisabled
-    ? '#ebeef0'
+    ? scale.neutral[30]
     : active
       ? color['bg-brand']
       : color['border-primary'];

@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
+import { color, shadow } from './tokens';
 
 // ─── Design tokens ─────────────────────────────────────────────────────────
 const tokens = {
-  borderPrimary:   '#dfe4e6',
-  borderBrand:     '#0276b1',
-  borderError:     '#ca2b34',
-  borderDisabled:  '#dfe4e6',
-  bgPrimary:       '#ffffff',
-  bgSecondary:     '#f5f6f7',
-  bgDisabled:      '#f5f6f7',
-  textPrimary:     '#092f42',
-  textSecondary:   '#5d7682',
-  textDisabled:    '#b3bec4',
-  textError:       '#ca2b34',
-  textBrand:       '#0276b1',
-  focusShadow:     '0px 1px 12px 0px rgba(2, 118, 177, 0.25)',
+  borderPrimary:   color['border-primary'],
+  borderBrand:     color['border-brand'],
+  borderError:     color['border-error'],
+  borderDisabled:  color['border-primary'],
+  bgPrimary:       color['bg-primary'],
+  bgSecondary:     color['bg-secondary'],
+  bgDisabled:      color['bg-secondary'],
+  textPrimary:     color['text-primary'],
+  textSecondary:   color['text-secondary'],
+  textDisabled:    color['text-disabled'],
+  textError:       color['text-error'],
+  textBrand:       color['text-brand'],
+  focusShadow:     shadow['focus'],
 };
 
 const font: React.CSSProperties = {
@@ -114,7 +115,7 @@ export function InputField({
 
   // ── Hover overlay (4 % dark tint from Figma) ───────────────────────────
   const hoverBg = state === 'hover'
-    ? 'linear-gradient(rgba(0,0,0,0.04),rgba(0,0,0,0.04)), linear-gradient(white,white)'
+    ? `linear-gradient(${color['hover']},${color['hover']}), linear-gradient(${color['bg-primary']},${color['bg-primary']})`
     : undefined;
 
   // ── Text colour ────────────────────────────────────────────────────────
