@@ -1,5 +1,4 @@
 import React from 'react';
-import { color, shadow, border } from './tokens';
 
 // ─── Chevron separator (inline, colour-overridable) ────────────────────────
 
@@ -16,7 +15,7 @@ function ChevronRight() {
     >
       <path
         d="M11.2159 7.28414C11.4554 7.55035 11.4554 7.94965 11.2159 8.18924L6.10475 13.3003C5.83854 13.5666 5.43924 13.5666 5.19965 13.3003C4.93345 13.0608 4.93345 12.6615 5.19965 12.4219L9.85822 7.76331L5.19965 3.07813C4.93345 2.83854 4.93345 2.43924 5.19965 2.19965C5.43924 1.93345 5.83854 1.93345 6.07813 2.19965L11.2159 7.28414Z"
-        fill={color['text-disabled']}
+        fill="var(--text-disabled)"
       />
     </svg>
   );
@@ -43,7 +42,7 @@ export interface BreadcrumbsProps {
 // ─── Step styles ───────────────────────────────────────────────────────────
 
 const stepBase: React.CSSProperties = {
-  fontFamily: "'Fira Sans', sans-serif",
+  fontFamily: 'var(--font-family-base)',
   fontSize: 14,
   fontWeight: 400,
   lineHeight: '18px',
@@ -58,20 +57,20 @@ const stepBase: React.CSSProperties = {
 
 const linkStyle: React.CSSProperties = {
   ...stepBase,
-  color: color['text-brand'],
+  color: 'var(--text-brand)',
 };
 
 const currentStyle: React.CSSProperties = {
   ...stepBase,
-  color: color['text-primary'],
+  color: 'var(--text-primary)',
   cursor: 'default',
   pointerEvents: 'none',
 };
 
 const focusStyle: React.CSSProperties = {
-  outline: border['focus'],
+  outline: 'var(--border-focus)',
   outlineOffset: 2,
-  boxShadow: shadow['focus'],
+  boxShadow: 'var(--shadow-focus)',
   borderRadius: 2,
 };
 

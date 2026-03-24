@@ -233,12 +233,12 @@ export const InsideForm: Story = {
         flexDirection: 'column',
         gap: 12,
         padding: 24,
-        border: '1px solid #e5e7eb',
+        border: '1px solid var(--border-color-primary)',
         borderRadius: 8,
         minWidth: 280,
       }}
     >
-      <label style={{ fontSize: 13, color: '#374151' }}>
+      <label style={{ fontSize: 13, color: 'var(--text-primary)' }}>
         Email
         <input
           type="email"
@@ -248,7 +248,7 @@ export const InsideForm: Story = {
             marginTop: 4,
             width: '100%',
             padding: '6px 8px',
-            border: '1px solid #d1d5db',
+            border: '1px solid var(--border-color-primary)',
             borderRadius: 4,
             fontSize: 13,
             boxSizing: 'border-box',
@@ -285,8 +285,8 @@ export const TokenUsage: Story = {
   render: () => {
     const variants = Object.keys(buttonTokens) as Array<keyof typeof buttonTokens>;
     return (
-      <div style={{ fontFamily: "'Fira Sans', sans-serif", maxWidth: 860, padding: '8px 0' }}>
-        <p style={{ margin: '0 0 28px', fontSize: 12, color: '#5d7682' }}>
+      <div style={{ fontFamily: 'var(--font-family-base)', maxWidth: 860, padding: '8px 0' }}>
+        <p style={{ margin: '0 0 28px', fontSize: 12, color: 'var(--text-secondary)' }}>
           Each variant's colour slots mapped to their design token name.
         </p>
         {variants.map((variant) => {
@@ -295,7 +295,7 @@ export const TokenUsage: Story = {
             <div key={variant} style={{ marginBottom: 36 }}>
               {/* Variant header with live preview */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-                <h3 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: '#092f42', textTransform: 'uppercase', letterSpacing: '0.06em', minWidth: 80 }}>
+                <h3 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.06em', minWidth: 80 }}>
                   {variant}
                 </h3>
                 <LearnlightButton variant={variant} size="m" text="Preview" />
@@ -306,7 +306,7 @@ export const TokenUsage: Story = {
               <div style={{ display: 'grid', gridTemplateColumns: '160px 140px 40px', gap: '6px 16px', alignItems: 'center' }}>
                 {/* Header */}
                 {['Slot', 'Token', ''].map((h) => (
-                  <div key={h} style={{ fontSize: 10, fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', paddingBottom: 4, borderBottom: '1px solid #ebeef0' }}>{h}</div>
+                  <div key={h} style={{ fontSize: 10, fontWeight: 700, color: 'var(--neutral-80)', textTransform: 'uppercase', letterSpacing: '0.06em', paddingBottom: 4, borderBottom: '1px solid var(--border-color-primary)' }}>{h}</div>
                 ))}
 
                 {/* Rows */}
@@ -314,8 +314,8 @@ export const TokenUsage: Story = {
                   const isTransparent = t.value === 'transparent' || t.value === '#0000000a';
                   return (
                     <React.Fragment key={slot}>
-                      <div style={{ fontSize: 12, color: '#5d7682' }}>{SLOT_LABELS[slot] ?? slot}</div>
-                      <div style={{ fontSize: 11, fontFamily: 'monospace', color: '#092f42', background: '#f5f6f7', padding: '2px 6px', borderRadius: 4 }}>
+                      <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{SLOT_LABELS[slot] ?? slot}</div>
+                      <div style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--text-primary)', background: 'var(--background-secondary)', padding: '2px 6px', borderRadius: 4 }}>
                         {t.token}
                       </div>
                       <div
@@ -358,16 +358,16 @@ export const AllVariants: Story = {
     ];
 
     return (
-      <div style={{ fontFamily: 'sans-serif', overflowX: 'auto' }}>
+      <div style={{ fontFamily: 'var(--font-family-base)', overflowX: 'auto' }}>
         {variants.map((variant) => (
           <div key={variant} style={{ marginBottom: 40 }}>
-            <h3 style={{ margin: '0 0 12px', fontSize: 13, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <h3 style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               {variant}
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: '12px 24px', alignItems: 'center', justifyItems: 'start' }}>
               {/* column headers */}
               {sizes.map((s) => (
-                <div key={s} style={{ fontSize: 11, color: '#9ca3af', textAlign: 'center' }}>
+                <div key={s} style={{ fontSize: 11, color: 'var(--neutral-80)', textAlign: 'center' }}>
                   {s.toUpperCase()} — {s === 'l' ? '40px' : s === 'm' ? '32px' : '24px'}
                 </div>
               ))}
@@ -380,7 +380,7 @@ export const AllVariants: Story = {
                       text="Button"
                       {...props}
                     />
-                    <span style={{ fontSize: 10, color: '#9ca3af' }}>{label}</span>
+                    <span style={{ fontSize: 10, color: 'var(--neutral-80)' }}>{label}</span>
                   </div>
                 ))
               )}

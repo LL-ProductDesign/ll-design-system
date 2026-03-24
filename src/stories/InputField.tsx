@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import { color, shadow } from './tokens';
 
 // ─── Design tokens ─────────────────────────────────────────────────────────
 const tokens = {
-  borderPrimary:   color['border-primary'],
-  borderBrand:     color['border-brand'],
-  borderError:     color['border-error'],
-  borderDisabled:  color['border-primary'],
-  bgPrimary:       color['bg-primary'],
-  bgSecondary:     color['bg-secondary'],
-  bgDisabled:      color['bg-secondary'],
-  textPrimary:     color['text-primary'],
-  textSecondary:   color['text-secondary'],
-  textDisabled:    color['text-disabled'],
-  textError:       color['text-error'],
-  textBrand:       color['text-brand'],
-  focusShadow:     shadow['focus'],
+  borderPrimary:   'var(--border-color-primary)',
+  borderBrand:     'var(--border-color-brand)',
+  borderError:     'var(--border-color-error)',
+  borderDisabled:  'var(--border-color-primary)',
+  bgPrimary:       'var(--background-primary)',
+  bgSecondary:     'var(--background-secondary)',
+  bgDisabled:      'var(--background-secondary)',
+  textPrimary:     'var(--text-primary)',
+  textSecondary:   'var(--text-secondary)',
+  textDisabled:    'var(--text-disabled)',
+  textError:       'var(--text-error)',
+  textBrand:       'var(--text-brand)',
+  focusShadow:     'var(--shadow-focus)',
 };
 
 const font: React.CSSProperties = {
-  fontFamily: "'Fira Sans', sans-serif",
+  fontFamily: 'var(--font-family-base)',
   fontSize: 14,
   fontStyle: 'normal',
 };
@@ -66,9 +65,9 @@ export interface InputFieldProps {
 function InfoIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <circle cx="8" cy="8" r="6.5" stroke={tokens.textSecondary} />
-      <rect x="7.25" y="6.75" width="1.5" height="5" rx="0.75" fill={tokens.textSecondary} />
-      <rect x="7.25" y="4.25" width="1.5" height="1.5" rx="0.75" fill={tokens.textSecondary} />
+      <circle cx="8" cy="8" r="6.5" stroke="var(--text-secondary)" />
+      <rect x="7.25" y="6.75" width="1.5" height="5" rx="0.75" fill="var(--text-secondary)" />
+      <rect x="7.25" y="4.25" width="1.5" height="1.5" rx="0.75" fill="var(--text-secondary)" />
     </svg>
   );
 }
@@ -115,7 +114,7 @@ export function InputField({
 
   // ── Hover overlay (4 % dark tint from Figma) ───────────────────────────
   const hoverBg = state === 'hover'
-    ? `linear-gradient(${color['hover']},${color['hover']}), linear-gradient(${color['bg-primary']},${color['bg-primary']})`
+    ? `linear-gradient(var(--hover),var(--hover)), linear-gradient(var(--background-primary),var(--background-primary))`
     : undefined;
 
   // ── Text colour ────────────────────────────────────────────────────────

@@ -102,7 +102,7 @@ export const WithClickHandlers: Story = {
           ]}
         />
         {log && (
-          <span style={{ fontFamily: 'monospace', fontSize: 12, color: '#5d7682' }}>
+          <span style={{ fontFamily: 'monospace', fontSize: 12, color: 'var(--text-secondary)' }}>
             {log}
           </span>
         )}

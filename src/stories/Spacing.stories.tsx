@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { color, spacingScale, spacingNames } from './tokens';
+import { spacingScale, spacingNames } from './tokens';
 
 const meta = {
   title: 'Foundations/Spacing',
@@ -12,8 +12,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const FONT: React.CSSProperties = {
-  fontFamily: "'Fira Sans', sans-serif",
-  color: color['text-primary'],
+  fontFamily: 'var(--font-family-base)',
+  color: 'var(--text-primary)',
 };
 
 export const Primitives: Story = {
@@ -28,14 +28,14 @@ export const Primitives: Story = {
             <div style={{
               width: '100%',
               height: value,
-              background: color['bg-secondary'],
+              background: 'var(--background-secondary)',
               borderRadius: 2,
               flexShrink: 0,
             }} />
             {/* Label */}
             <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', whiteSpace: 'nowrap', minWidth: 340 }}>
               <span style={{ ...FONT, fontSize: 16 }}>{spacingNames[key]}</span>
-              <span style={{ ...FONT, fontSize: 14, color: color['text-secondary'] }}>{value}px</span>
+              <span style={{ ...FONT, fontSize: 14, color: 'var(--text-secondary)' }}>{value}px</span>
             </div>
           </div>
         ))}

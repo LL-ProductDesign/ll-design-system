@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { Avatar } from './Avatar';
+import { color, scale } from './tokens';
 
 const meta = {
   title: 'Components/Avatar',
@@ -70,7 +71,7 @@ export const AllSizes: Story = {
       {(['xs', 's', 'm', 'l', 'xl'] as const).map((size) => (
         <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
           <Avatar size={size} initials="JD" />
-          <span style={{ fontSize: 10, color: '#9ca3af', fontFamily: 'sans-serif' }}>
+          <span style={{ fontSize: 10, color: 'var(--neutral-80)', fontFamily: 'var(--font-family-base)' }}>
             {size.toUpperCase()}
           </span>
         </div>
@@ -90,7 +91,7 @@ export const AllStatuses: Story = {
       {(['none', 'online', 'away', 'busy', 'offline'] as const).map((status) => (
         <div key={status} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
           <Avatar size="m" initials="JD" status={status} />
-          <span style={{ fontSize: 10, color: '#9ca3af', fontFamily: 'sans-serif', textTransform: 'capitalize' }}>
+          <span style={{ fontSize: 10, color: 'var(--neutral-80)', fontFamily: 'var(--font-family-base)', textTransform: 'capitalize' }}>
             {status}
           </span>
         </div>
@@ -118,7 +119,7 @@ export const AllVariants: Story = {
     ];
 
     return (
-      <div style={{ fontFamily: 'sans-serif', overflowX: 'auto' }}>
+      <div style={{ fontFamily: 'var(--font-family-base)', overflowX: 'auto' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: `120px repeat(${sizes.length}, 64px)`,
@@ -128,7 +129,7 @@ export const AllVariants: Story = {
           {/* Header row */}
           <div />
           {sizes.map((s) => (
-            <div key={s} style={{ fontSize: 11, color: '#9ca3af', textAlign: 'center' }}>
+            <div key={s} style={{ fontSize: 11, color: 'var(--neutral-80)', textAlign: 'center' }}>
               {s.toUpperCase()}
             </div>
           ))}
@@ -136,12 +137,52 @@ export const AllVariants: Story = {
           {/* Data rows */}
           {rows.map(({ label, props }) => (
             <React.Fragment key={label}>
-              <div style={{ fontSize: 12, color: '#6b7280' }}>{label}</div>
+              <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{label}</div>
               {sizes.map((size) => (
                 <div key={size} style={{ display: 'flex', justifyContent: 'center' }}>
                   <Avatar size={size} {...props} />
                 </div>
               ))}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    );
+  },
+  args: {},
+};
+
+// ─── Token Usage ──────────────────────────────────────────────────────────────
+
+/** Colour tokens consumed by the Avatar component */
+export const TokenUsage: Story = {
+  name: 'Token Usage',
+  render: () => {
+    const slots: Array<{ slot: string; token: string; value: string }> = [
+      { slot: 'Background — initials',   token: 'bg-brand',       value: color['bg-brand'] },
+      { slot: 'Background — icon/empty', token: 'bg-secondary',   value: color['bg-secondary'] },
+      { slot: 'Text — initials',         token: 'text-invert',    value: color['text-invert'] },
+      { slot: 'Text — icon/empty',       token: 'text-secondary', value: color['text-secondary'] },
+      { slot: 'Status — online',         token: 'bg-green',       value: color['bg-green'] },
+      { slot: 'Status — away',           token: 'yellow-500',     value: scale.yellow[500] },
+      { slot: 'Status — busy',           token: 'text-error',     value: color['text-error'] },
+      { slot: 'Status — offline',        token: 'text-disabled',  value: color['text-disabled'] },
+      { slot: 'Status ring border',      token: 'bg-primary',     value: color['bg-primary'] },
+    ];
+    return (
+      <div style={{ fontFamily: 'var(--font-family-base)', maxWidth: 500, padding: '8px 0' }}>
+        <p style={{ margin: '0 0 20px', fontSize: 12, color: 'var(--text-secondary)' }}>
+          Colour tokens used by this component.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '220px 160px 40px', gap: '6px 16px', alignItems: 'center' }}>
+          {['Slot', 'Token', ''].map(h => (
+            <div key={h} style={{ fontSize: 10, fontWeight: 700, color: 'var(--neutral-80)', textTransform: 'uppercase', letterSpacing: '0.06em', paddingBottom: 4, borderBottom: '1px solid var(--border-color-primary)' }}>{h}</div>
+          ))}
+          {slots.map(({ slot, token, value }) => (
+            <React.Fragment key={slot}>
+              <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{slot}</div>
+              <div style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--text-primary)', background: 'var(--background-secondary)', padding: '2px 6px', borderRadius: 4 }}>{token}</div>
+              <div title={value} style={{ width: 28, height: 18, borderRadius: 4, background: value, border: '1px solid rgba(0,0,0,0.1)' }} />
             </React.Fragment>
           ))}
         </div>

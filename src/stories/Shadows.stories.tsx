@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { color, shadow, shadowScale } from './tokens';
 
 const meta = {
   title: 'Foundations/Shadows',
@@ -14,13 +13,13 @@ type Story = StoryObj<typeof meta>;
 // ─── Shared styles ────────────────────────────────────────────────────────────
 
 const FONT: React.CSSProperties = {
-  fontFamily: "'Fira Sans', sans-serif",
-  color: color['text-primary'],
+  fontFamily: 'var(--font-family-base)',
+  color: 'var(--text-primary)',
 };
 
 const CARD: React.CSSProperties = {
-  background: color['bg-primary'],
-  border: `1px solid ${color['border-secondary']}`,
+  background: 'var(--background-primary)',
+  border: '1px solid var(--border-color-secondary)',
   borderRadius: 16,
   width: 240,
   height: 180,
@@ -37,13 +36,10 @@ export const Primitives: Story = {
   name: 'Primitives',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 40, padding: '40px 0' }}>
-      {(Object.entries(shadowScale) as [keyof typeof shadowScale, string][]).map(([name, value]) => (
+      {([['shadow1', 'var(--shadow-1)'], ['shadow2', 'var(--shadow-2)']] as const).map(([name, value]) => (
         <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
           <div style={{ ...CARD, boxShadow: value }} />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <span style={{ ...FONT, fontSize: 16, fontWeight: 600 }}>{name}</span>
-            <span style={{ ...FONT, fontSize: 14, color: color['text-secondary'] }}>{value}</span>
-          </div>
+          <span style={{ ...FONT, fontSize: 16, fontWeight: 600 }}>{name}</span>
         </div>
       ))}
     </div>
@@ -53,33 +49,32 @@ export const Primitives: Story = {
 // ─── Semantic tokens ──────────────────────────────────────────────────────────
 
 export const CardShadow: Story = {
-  name: 'Token / card-shadow',
+  name: 'Token / card',
   render: () => (
     <div style={{ padding: '40px 0' }}>
-      <div style={{ ...CARD, boxShadow: shadow['card'] }}>
-        <span style={{ ...FONT, fontSize: 14 }}>card-shadow</span>
-        <span style={{ ...FONT, fontSize: 12, color: color['text-secondary'] }}>{shadow['card']}</span>
+      <div style={{ ...CARD, boxShadow: 'var(--shadow-card)' }}>
+        <span style={{ ...FONT, fontSize: 14 }}>card</span>
       </div>
     </div>
   ),
 };
 
 export const PageHeaderShadow: Story = {
-  name: 'Token / page-header-shadow',
+  name: 'Token / page-header',
   render: () => (
     <div style={{ padding: '40px 0' }}>
       <div style={{
-        background: color['bg-brand'],
-        borderBottom: `1px solid ${color['border-primary']}`,
-        boxShadow: shadow['page-header'],
+        background: 'var(--background-brand)',
+        borderBottom: '1px solid var(--border-color-primary)',
+        boxShadow: 'var(--shadow-page-header)',
         height: 40,
         display: 'flex',
         alignItems: 'center',
         padding: '0 12px',
         width: 480,
       }}>
-        <span style={{ ...FONT, fontSize: 14, color: color['text-invert'] }}>
-          page-header-shadow — {shadow['page-header']}
+        <span style={{ ...FONT, fontSize: 14, color: 'var(--text-invert)' }}>
+          page-header
         </span>
       </div>
     </div>
@@ -87,28 +82,26 @@ export const PageHeaderShadow: Story = {
 };
 
 export const ModalShadow: Story = {
-  name: 'Token / modal-shadow',
+  name: 'Token / modal',
   render: () => (
     <div style={{ padding: '40px 0' }}>
-      <div style={{ ...CARD, boxShadow: shadow['modal'] }}>
+      <div style={{ ...CARD, boxShadow: 'var(--shadow-modal)' }}>
         <span style={{ ...FONT, fontSize: 14 }}>modal</span>
-        <span style={{ ...FONT, fontSize: 12, color: color['text-secondary'] }}>{shadow['modal']}</span>
       </div>
     </div>
   ),
 };
 
 export const FocusShadow: Story = {
-  name: 'Token / focus-shadow',
+  name: 'Token / focus',
   render: () => (
     <div style={{ padding: '40px 0' }}>
       <div style={{
         ...CARD,
-        border: `1px solid ${color['focus']}`,
-        boxShadow: shadow['focus'],
+        border: '1px solid var(--focus)',
+        boxShadow: 'var(--shadow-focus)',
       }}>
-        <span style={{ ...FONT, fontSize: 14 }}>Focus state</span>
-        <span style={{ ...FONT, fontSize: 12, color: color['text-secondary'] }}>{shadow['focus']}</span>
+        <span style={{ ...FONT, fontSize: 14 }}>focus</span>
       </div>
     </div>
   ),
@@ -126,53 +119,51 @@ export const AllShadows: Story = {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <span style={{ ...FONT, fontSize: 18, fontWeight: 600 }}>Tokens</span>
           {[
-            'card-shadow = shadow1',
-            'page-header-shadow = shadow1',
-            'modal = shadow2',
+            'card → shadow1',
+            'page-header → shadow1',
+            'modal → shadow2',
+            'focus → focus-ring',
           ].map(line => (
             <span key={line} style={{ ...FONT, fontSize: 16 }}>{line}</span>
           ))}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <span style={{ ...FONT, fontSize: 18, fontWeight: 600 }}>Primitives</span>
-          {(Object.entries(shadowScale) as [string, string][]).map(([name, value]) => (
-            <span key={name} style={{ ...FONT, fontSize: 16 }}>{name} = box-shadow: {value}</span>
+          {(['shadow1', 'shadow2'] as const).map(name => (
+            <span key={name} style={{ ...FONT, fontSize: 16 }}>{name}</span>
           ))}
         </div>
       </div>
 
-      {/* card-shadow */}
-      <div style={{ ...CARD, boxShadow: shadow['card'] }}>
-        <span style={{ ...FONT, fontSize: 14 }}>card-shadow</span>
-        <span style={{ ...FONT, fontSize: 12, color: color['text-secondary'] }}>{shadow['card']}</span>
+      {/* card */}
+      <div style={{ ...CARD, boxShadow: 'var(--shadow-card)' }}>
+        <span style={{ ...FONT, fontSize: 14 }}>card</span>
       </div>
 
-      {/* page-header-shadow */}
+      {/* page-header */}
       <div style={{
-        background: color['bg-brand'],
-        borderBottom: `1px solid ${color['border-primary']}`,
-        boxShadow: shadow['page-header'],
+        background: 'var(--background-brand)',
+        borderBottom: '1px solid var(--border-color-primary)',
+        boxShadow: 'var(--shadow-page-header)',
         height: 40,
         display: 'flex',
         alignItems: 'center',
         padding: '0 12px',
         width: 480,
       }}>
-        <span style={{ ...FONT, fontSize: 14, color: color['text-invert'] }}>
-          page-header-shadow — {shadow['page-header']}
+        <span style={{ ...FONT, fontSize: 14, color: 'var(--text-invert)' }}>
+          page-header
         </span>
       </div>
 
       {/* modal */}
-      <div style={{ ...CARD, boxShadow: shadow['modal'] }}>
+      <div style={{ ...CARD, boxShadow: 'var(--shadow-modal)' }}>
         <span style={{ ...FONT, fontSize: 14 }}>modal</span>
-        <span style={{ ...FONT, fontSize: 12, color: color['text-secondary'] }}>{shadow['modal']}</span>
       </div>
 
       {/* focus */}
-      <div style={{ ...CARD, border: `1px solid ${color['focus']}`, boxShadow: shadow['focus'] }}>
-        <span style={{ ...FONT, fontSize: 14 }}>Focus state</span>
-        <span style={{ ...FONT, fontSize: 12, color: color['text-secondary'] }}>{shadow['focus']}</span>
+      <div style={{ ...CARD, border: '1px solid var(--focus)', boxShadow: 'var(--shadow-focus)' }}>
+        <span style={{ ...FONT, fontSize: 14 }}>focus</span>
       </div>
 
     </div>

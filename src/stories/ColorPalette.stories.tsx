@@ -1,8 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-// Color data is sourced from the shared token file — same values the components use
-import { color as semanticColor, scale } from './tokens';
-
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface SwatchProps {
@@ -34,7 +31,7 @@ function Swatch({ name, value, textDark }: SwatchProps) {
     setTimeout(() => setCopied(false), 1200);
   };
 
-  const labelColor = textDark ? '#092f42' : '#ffffff';
+  const labelColor = textDark ? 'var(--text-primary)' : 'var(--text-invert)';
 
   return (
     <div
@@ -44,8 +41,8 @@ function Swatch({ name, value, textDark }: SwatchProps) {
         cursor: 'pointer',
         borderRadius: 8,
         overflow: 'hidden',
-        border: '1px solid rgba(0,0,0,0.08)',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+        border: '1px solid var(--border-color-primary)',
+        boxShadow: 'var(--shadow-subtle)',
         transition: 'transform 0.1s',
         minWidth: 0,
       }}
@@ -69,14 +66,14 @@ function Swatch({ name, value, textDark }: SwatchProps) {
       {/* Label */}
       <div
         style={{
-          background: '#fff',
+          background: 'var(--background-primary)',
           padding: '6px 8px 8px',
         }}
       >
-        <div style={{ fontSize: 10, fontWeight: 600, color: '#092f42', lineHeight: 1.3 }}>
+        <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.3 }}>
           {name}
         </div>
-        <div style={{ fontSize: 10, color: '#5d7682', marginTop: 2, fontFamily: 'monospace' }}>
+        <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, fontFamily: 'monospace' }}>
           {value}
         </div>
       </div>
@@ -93,7 +90,7 @@ function ScaleSwatch({ name, value, textDark }: SwatchProps) {
     setTimeout(() => setCopied(false), 1200);
   };
 
-  const labelColor = textDark ? '#092f42' : '#ffffff';
+  const labelColor = textDark ? 'var(--text-primary)' : 'var(--text-invert)';
 
   return (
     <div
@@ -103,7 +100,7 @@ function ScaleSwatch({ name, value, textDark }: SwatchProps) {
         cursor: 'pointer',
         borderRadius: 6,
         overflow: 'hidden',
-        border: '1px solid rgba(0,0,0,0.06)',
+        border: '1px solid var(--border-color-primary)',
       }}
     >
       <div
@@ -119,9 +116,9 @@ function ScaleSwatch({ name, value, textDark }: SwatchProps) {
           <span style={{ fontSize: 9, color: labelColor, fontWeight: 700 }}>✓</span>
         )}
       </div>
-      <div style={{ background: '#fff', padding: '4px 6px 5px' }}>
-        <div style={{ fontSize: 9, fontWeight: 600, color: '#092f42' }}>{name}</div>
-        <div style={{ fontSize: 9, color: '#5d7682', fontFamily: 'monospace' }}>{value}</div>
+      <div style={{ background: 'var(--background-primary)', padding: '4px 6px 5px' }}>
+        <div style={{ fontSize: 9, fontWeight: 600, color: 'var(--text-primary)' }}>{name}</div>
+        <div style={{ fontSize: 9, color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{value}</div>
       </div>
     </div>
   );
@@ -131,11 +128,11 @@ function Section({ title, description, colors, columns = 4 }: GroupProps) {
   return (
     <div style={{ marginBottom: 40 }}>
       <div style={{ marginBottom: 12 }}>
-        <h3 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: '#092f42', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <h3 style={{ margin: 0, fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           {title}
         </h3>
         {description && (
-          <p style={{ margin: '4px 0 0', fontSize: 12, color: '#5d7682' }}>{description}</p>
+          <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--text-secondary)' }}>{description}</p>
         )}
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: 10 }}>
@@ -150,7 +147,7 @@ function Section({ title, description, colors, columns = 4 }: GroupProps) {
 function ScaleSection({ title, swatches }: ScaleGroupProps) {
   return (
     <div style={{ marginBottom: 32 }}>
-      <h3 style={{ margin: '0 0 10px', fontSize: 13, fontWeight: 700, color: '#092f42', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+      <h3 style={{ margin: '0 0 10px', fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {title}
       </h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(72px, 1fr))', gap: 8 }}>
@@ -367,9 +364,9 @@ const BASE = {
 
 function SemanticPage() {
   return (
-    <div style={{ fontFamily: "'Fira Sans', sans-serif", maxWidth: 860, padding: 32 }}>
-      <h2 style={{ margin: '0 0 4px', fontSize: 22, fontWeight: 700, color: '#092f42' }}>Colors</h2>
-      <p style={{ margin: '0 0 36px', fontSize: 13, color: '#5d7682' }}>
+    <div style={{ fontFamily: 'var(--font-family-base)', maxWidth: 860, padding: 32 }}>
+      <h2 style={{ margin: '0 0 4px', fontSize: 22, fontWeight: 700, color: 'var(--text-primary)' }}>Colors</h2>
+      <p style={{ margin: '0 0 36px', fontSize: 13, color: 'var(--text-secondary)' }}>
         Semantic color tokens — click any swatch to copy its hex value.
       </p>
       <Section title="Backgrounds"   colors={SEMANTIC.backgrounds}   columns={4} />
@@ -384,9 +381,9 @@ function SemanticPage() {
 
 function BaseColorsPage() {
   return (
-    <div style={{ fontFamily: "'Fira Sans', sans-serif", maxWidth: 860, padding: 32 }}>
-      <h2 style={{ margin: '0 0 4px', fontSize: 22, fontWeight: 700, color: '#092f42' }}>Base Colors</h2>
-      <p style={{ margin: '0 0 36px', fontSize: 13, color: '#5d7682' }}>
+    <div style={{ fontFamily: 'var(--font-family-base)', maxWidth: 860, padding: 32 }}>
+      <h2 style={{ margin: '0 0 4px', fontSize: 22, fontWeight: 700, color: 'var(--text-primary)' }}>Base Colors</h2>
+      <p style={{ margin: '0 0 36px', fontSize: 13, color: 'var(--text-secondary)' }}>
         Primitive color scales — click any swatch to copy its hex value.
       </p>
       <ScaleSection title="Blue"      swatches={BASE.blue} />

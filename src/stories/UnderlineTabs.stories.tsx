@@ -89,7 +89,7 @@ export const WithIcons: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
       <div>
-        <p style={{ fontFamily: "'Fira Sans', sans-serif", fontSize: 12, marginBottom: 8, color: '#5d7682' }}>Left icon</p>
+        <p style={{ fontFamily: 'var(--font-family-base)', fontSize: 12, marginBottom: 8, color: 'var(--text-secondary)' }}>Left icon</p>
         <Controlled
           tabs={[
             { id: 'a', label: 'Overview', icon: <PlaceholderIcon />, iconPosition: 'left' },
@@ -99,7 +99,7 @@ export const WithIcons: Story = {
         />
       </div>
       <div>
-        <p style={{ fontFamily: "'Fira Sans', sans-serif", fontSize: 12, marginBottom: 8, color: '#5d7682' }}>Right icon</p>
+        <p style={{ fontFamily: 'var(--font-family-base)', fontSize: 12, marginBottom: 8, color: 'var(--text-secondary)' }}>Right icon</p>
         <Controlled
           tabs={[
             { id: 'a', label: 'Overview', icon: <PlaceholderIcon />, iconPosition: 'right' },
@@ -122,7 +122,7 @@ export const AllStates: Story = {
       { id: 'disabled', label: 'Disabled', disabled: true },
     ];
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, fontFamily: "'Fira Sans', sans-serif" }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, fontFamily: 'var(--font-family-base)' }}>
         <Controlled tabs={tabs} />
         <Controlled tabs={[
           { id: 'all',    label: 'All' },

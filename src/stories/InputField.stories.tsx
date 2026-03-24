@@ -50,7 +50,7 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div style={{ width: 370, padding: 24, fontFamily: "'Fira Sans', sans-serif" }}>
+      <div style={{ width: 370, padding: 24, fontFamily: 'var(--font-family-base)' }}>
         <Story />
       </div>
     ),
@@ -355,7 +355,7 @@ export const CharacterCounter: Story = {
           variant={over ? 'error' : 'default'}
           id="input-char-counter"
         />
-        <div style={{ textAlign: 'right', fontSize: 12, marginTop: 4, color: over ? '#ca2b34' : '#5d7682', fontFamily: "'Fira Sans', sans-serif" }}>
+        <div style={{ textAlign: 'right', fontSize: 12, marginTop: 4, color: over ? 'var(--text-error)' : 'var(--text-secondary)', fontFamily: 'var(--font-family-base)' }}>
           {value.length} / {MAX}
         </div>
       </div>
@@ -381,10 +381,10 @@ export const AllStates: Story = {
       { label: 'With right icon',   props: { placeholder: 'Email',   rightIcon: <MailIcon /> } },
     ];
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: 370, fontFamily: "'Fira Sans', sans-serif" }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: 370, fontFamily: 'var(--font-family-base)' }}>
         {rows.map(({ label, props }) => (
           <div key={label}>
-            <p style={{ margin: '0 0 6px', fontSize: 11, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <p style={{ margin: '0 0 6px', fontSize: 11, color: 'var(--neutral-80)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               {label}
             </p>
             <Controlled label="Level" required {...props} />
