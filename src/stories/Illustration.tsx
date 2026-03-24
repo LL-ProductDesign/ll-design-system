@@ -1,0 +1,175 @@
+import React from 'react';
+
+// ─── Asset imports ─────────────────────────────────────────────────────────
+import noNotificationsBg  from '../assets/illustrations/no-notifications-bg.svg';
+import noNotifications    from '../assets/illustrations/no-notifications.svg';
+import allDoneBg          from '../assets/illustrations/all-done-bg.svg';
+import allDone            from '../assets/illustrations/all-done.svg';
+import noRecommendationsBg from '../assets/illustrations/no-recommendations-bg.svg';
+import noRecommendations  from '../assets/illustrations/no-recommendations.svg';
+import certificatesBg     from '../assets/illustrations/certificates-bg.svg';
+import certificates       from '../assets/illustrations/certificates.svg';
+import recommendationBg   from '../assets/illustrations/recommendation-bg.svg';
+import recommendationAssessment from '../assets/illustrations/recommendation-assessment.svg';
+
+// ─── Types ─────────────────────────────────────────────────────────────────
+
+/**
+ * Available illustration names.
+ *
+ * - `no-notifications`         — Empty mailbox; use for empty notification lists.
+ * - `all-done`                 — Two people celebrating; use for completed states.
+ * - `no-recommendations`       — Person meditating; use when no recommendations exist.
+ * - `certificates`             — Person holding a certificate; use on certificate pages.
+ * - `recommendation-assessment` — Activity card thumbnail (assessment type).
+ */
+export type IllustrationName =
+  | 'no-notifications'
+  | 'all-done'
+  | 'no-recommendations'
+  | 'certificates'
+  | 'recommendation-assessment';
+
+export interface IllustrationProps {
+  /** Which illustration to display. */
+  name: IllustrationName;
+  /** Accessible label. Defaults to the illustration name. Set to "" for purely decorative usage. */
+  alt?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+// ─── Layout config per illustration ────────────────────────────────────────
+// All measurements lifted directly from Figma node positions.
+
+interface IllustrationConfig {
+  /** Natural width of the containing box (px). */
+  width: number;
+  /** Natural height of the containing box (px). */
+  height: number;
+  bg: string;
+  main: string;
+  /** Inline styles for the background layer */
+  bgStyle: React.CSSProperties;
+  /** Inline styles for the main illustration layer */
+  mainStyle: React.CSSProperties;
+}
+
+const CONFIGS: Record<IllustrationName, IllustrationConfig> = {
+  'no-notifications': {
+    width: 320,
+    height: 320,
+    bg: noNotificationsBg,
+    main: noNotifications,
+    bgStyle: {
+      position: 'absolute',
+      top: '2.78%', right: '0', bottom: '9.44%', left: '0',
+    },
+    mainStyle: {
+      position: 'absolute',
+      top: '50%', left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 240, height: 195,
+    },
+  },
+
+  'all-done': {
+    width: 600,
+    height: 400,
+    bg: allDoneBg,
+    main: allDone,
+    bgStyle: {
+      position: 'absolute',
+      top: '50%', left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 477, height: 370,
+      zIndex: 1,
+    },
+    mainStyle: {
+      position: 'absolute',
+      top: 0, left: '-2.97%', right: '-2.97%', bottom: 0,
+      zIndex: 2,
+    },
+  },
+
+  'no-recommendations': {
+    width: 600,
+    height: 400,
+    bg: noRecommendationsBg,
+    main: noRecommendations,
+    bgStyle: {
+      position: 'absolute',
+      top: 23, left: 46,
+      width: 483, height: 338,
+      zIndex: 1,
+    },
+    mainStyle: {
+      position: 'absolute',
+      top: '50%', left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 538, height: 360,
+      zIndex: 2,
+    },
+  },
+
+  'certificates': {
+    width: 320,
+    height: 320,
+    bg: certificatesBg,
+    main: certificates,
+    bgStyle: {
+      position: 'absolute',
+      top: '50%', left: '50%',
+      transform: 'translate(-50%, -50%) rotate(-90deg)',
+      width: 317, height: 264,
+    },
+    mainStyle: {
+      position: 'absolute',
+      top: '4.31%', right: '10.29%', bottom: '-0.01%', left: '10.28%',
+    },
+  },
+
+  'recommendation-assessment': {
+    width: 180,
+    height: 180,
+    bg: recommendationBg,
+    main: recommendationAssessment,
+    bgStyle: {
+      position: 'absolute',
+      top: '6.67%', right: '4.44%', bottom: '13.33%', left: '4.44%',
+    },
+    mainStyle: {
+      position: 'absolute',
+      top: 0, right: '4.6%', bottom: 0, left: '2.9%',
+    },
+  },
+};
+
+// ─── Component ──────────────────────────────────────────────────────────────
+
+/** Learnlight Design System — Illustration */
+export function Illustration({ name, alt, className, style }: IllustrationProps) {
+  const cfg = CONFIGS[name];
+  const label = alt !== undefined ? alt : name.replace(/-/g, ' ');
+
+  return (
+    <div
+      className={className}
+      role={label ? 'img' : undefined}
+      aria-label={label || undefined}
+      style={{
+        position: 'relative',
+        width: cfg.width,
+        height: cfg.height,
+        flexShrink: 0,
+        overflow: 'visible',
+        ...style,
+      }}
+    >
+      {/* Background layer */}
+      <img src={cfg.bg} alt="" aria-hidden style={{ ...cfg.bgStyle, display: 'block' }} />
+      {/* Main illustration layer */}
+      <img src={cfg.main} alt="" aria-hidden style={{ ...cfg.mainStyle, display: 'block' }} />
+    </div>
+  );
+}
