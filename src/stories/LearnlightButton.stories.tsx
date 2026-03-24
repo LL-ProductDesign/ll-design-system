@@ -287,7 +287,7 @@ export const TokenUsage: Story = {
     return (
       <div style={{ fontFamily: "'Fira Sans', sans-serif", maxWidth: 860, padding: '8px 0' }}>
         <p style={{ margin: '0 0 28px', fontSize: 12, color: '#5d7682' }}>
-          Each variant's colour slots mapped to their design token. Click a swatch to copy the hex value.
+          Each variant's colour slots mapped to their design token name.
         </p>
         {variants.map((variant) => {
           const slots = buttonTokens[variant];
@@ -303,16 +303,14 @@ export const TokenUsage: Story = {
               </div>
 
               {/* Token rows */}
-              <div style={{ display: 'grid', gridTemplateColumns: '160px 140px 80px 1fr', gap: '6px 16px', alignItems: 'center' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '160px 140px 40px', gap: '6px 16px', alignItems: 'center' }}>
                 {/* Header */}
-                {['Slot', 'Token', 'Value', ''].map((h) => (
+                {['Slot', 'Token', ''].map((h) => (
                   <div key={h} style={{ fontSize: 10, fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', paddingBottom: 4, borderBottom: '1px solid #ebeef0' }}>{h}</div>
                 ))}
 
                 {/* Rows */}
                 {(Object.entries(slots) as Array<[string, { token: string; value: string }]>).map(([slot, t]) => {
-                  const [copied, setCopied] = React.useState(false);
-                  const copy = () => { navigator.clipboard?.writeText(t.value); setCopied(true); setTimeout(() => setCopied(false), 1200); };
                   const isTransparent = t.value === 'transparent' || t.value === '#0000000a';
                   return (
                     <React.Fragment key={slot}>
@@ -320,9 +318,7 @@ export const TokenUsage: Story = {
                       <div style={{ fontSize: 11, fontFamily: 'monospace', color: '#092f42', background: '#f5f6f7', padding: '2px 6px', borderRadius: 4 }}>
                         {t.token}
                       </div>
-                      <div style={{ fontSize: 11, fontFamily: 'monospace', color: '#5d7682' }}>{isTransparent ? '—' : t.value}</div>
                       <div
-                        onClick={copy}
                         title={t.value}
                         style={{
                           width: 28,
@@ -330,14 +326,8 @@ export const TokenUsage: Story = {
                           borderRadius: 4,
                           background: isTransparent ? 'repeating-conic-gradient(#dfe4e6 0% 25%, #fff 0% 50%) 0 0 / 8px 8px' : t.value,
                           border: '1px solid rgba(0,0,0,0.1)',
-                          cursor: isTransparent ? 'default' : 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
                         }}
-                      >
-                        {copied && <span style={{ fontSize: 8, color: '#fff', fontWeight: 700 }}>✓</span>}
-                      </div>
+                      />
                     </React.Fragment>
                   );
                 })}
