@@ -1,26 +1,26 @@
 import React from 'react';
 
-// ─── Asset imports ─────────────────────────────────────────────────────────
-import noNotificationsBg  from '../assets/illustrations/no-notifications-bg.svg';
-import noNotifications    from '../assets/illustrations/no-notifications.svg';
-import allDoneBg          from '../assets/illustrations/all-done-bg.svg';
-import allDone            from '../assets/illustrations/all-done.svg';
-import noRecommendationsBg from '../assets/illustrations/no-recommendations-bg.svg';
-import noRecommendations  from '../assets/illustrations/no-recommendations.svg';
-import certificatesBg     from '../assets/illustrations/certificates-bg.svg';
-import certificates       from '../assets/illustrations/certificates.svg';
-import recommendationBg   from '../assets/illustrations/recommendation-bg.svg';
-import recommendationAssessment from '../assets/illustrations/recommendation-assessment.svg';
+// ─── Asset imports (raw SVG strings — same pattern as Icons.tsx) ────────────
+import noNotificationsBg  from '../assets/illustrations/no-notifications-bg.svg?raw';
+import noNotifications    from '../assets/illustrations/no-notifications.svg?raw';
+import allDoneBg          from '../assets/illustrations/all-done-bg.svg?raw';
+import allDone            from '../assets/illustrations/all-done.svg?raw';
+import noRecommendationsBg from '../assets/illustrations/no-recommendations-bg.svg?raw';
+import noRecommendations  from '../assets/illustrations/no-recommendations.svg?raw';
+import certificatesBg     from '../assets/illustrations/certificates-bg.svg?raw';
+import certificates       from '../assets/illustrations/certificates.svg?raw';
+import recommendationBg   from '../assets/illustrations/recommendation-bg.svg?raw';
+import recommendationAssessment from '../assets/illustrations/recommendation-assessment.svg?raw';
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 
 /**
  * Available illustration names.
  *
- * - `no-notifications`         — Empty mailbox; use for empty notification lists.
- * - `all-done`                 — Two people celebrating; use for completed states.
- * - `no-recommendations`       — Person meditating; use when no recommendations exist.
- * - `certificates`             — Person holding a certificate; use on certificate pages.
+ * - `no-notifications`          — Empty mailbox; use for empty notification lists.
+ * - `all-done`                  — Two people celebrating; use for completed states.
+ * - `no-recommendations`        — Person meditating; use when no recommendations exist.
+ * - `certificates`              — Person holding a certificate; use on certificate pages.
  * - `recommendation-assessment` — Activity card thumbnail (assessment type).
  */
 export type IllustrationName =
@@ -40,18 +40,13 @@ export interface IllustrationProps {
 }
 
 // ─── Layout config per illustration ────────────────────────────────────────
-// All measurements lifted directly from Figma node positions.
 
 interface IllustrationConfig {
-  /** Natural width of the containing box (px). */
   width: number;
-  /** Natural height of the containing box (px). */
   height: number;
   bg: string;
   main: string;
-  /** Inline styles for the background layer */
   bgStyle: React.CSSProperties;
-  /** Inline styles for the main illustration layer */
   mainStyle: React.CSSProperties;
 }
 
@@ -145,6 +140,18 @@ const CONFIGS: Record<IllustrationName, IllustrationConfig> = {
   },
 };
 
+// ─── Inline SVG layer ───────────────────────────────────────────────────────
+
+function SvgLayer({ svg, style }: { svg: string; style: React.CSSProperties }) {
+  return (
+    <span
+      aria-hidden
+      style={{ display: 'block', overflow: 'visible', ...style }}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  );
+}
+
 // ─── Component ──────────────────────────────────────────────────────────────
 
 /** Learnlight Design System — Illustration */
@@ -166,10 +173,8 @@ export function Illustration({ name, alt, className, style }: IllustrationProps)
         ...style,
       }}
     >
-      {/* Background layer */}
-      <img src={cfg.bg} alt="" aria-hidden style={{ ...cfg.bgStyle, display: 'block' }} />
-      {/* Main illustration layer */}
-      <img src={cfg.main} alt="" aria-hidden style={{ ...cfg.mainStyle, display: 'block' }} />
+      <SvgLayer svg={cfg.bg}   style={cfg.bgStyle} />
+      <SvgLayer svg={cfg.main} style={cfg.mainStyle} />
     </div>
   );
 }
