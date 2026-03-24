@@ -225,7 +225,11 @@ export type BorderToken = keyof typeof border;
 // Maps each button variant to the semantic tokens it consumes.
 
 // blue-500 at 40% opacity — used for all disabled states
-const DISABLED = { token: 'blue-500 / 40%', value: 'rgba(2, 118, 177, 0.4)' } as const;
+// Value derived from scale.blue[500] + 40% alpha (0x66 = Math.round(0.4 * 255))
+const DISABLED = {
+  token: 'blue-500 / 40%',
+  value: `${scale.blue[500]}66`,   // #0276b1 + 66 hex = 40% opacity
+} as const;
 
 export const buttonTokens = {
   primary: {

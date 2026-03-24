@@ -1,5 +1,5 @@
 import React from 'react';
-import { buttonTokens, typeScale, typeTokens } from './tokens';
+import { buttonTokens, typeScale, typeTokens, radius } from './tokens';
 
 // Resolve button-text token → primitive → fontWeight
 const buttonTextPrimitive = typeScale.find(
@@ -155,7 +155,7 @@ export function LearnlightButton({
         background: bg,
         color,
         border,
-        borderRadius: 6,
+        borderRadius: radius['interactive'],
         fontSize: dim.fontSize,
         fontFamily: "'Fira Sans', sans-serif",
         fontWeight: BUTTON_FONT_WEIGHT,
