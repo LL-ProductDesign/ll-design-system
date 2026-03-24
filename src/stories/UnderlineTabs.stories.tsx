@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { UnderlineTabs, type TabItem } from './UnderlineTabs';
 
 const meta: Meta<typeof UnderlineTabs> = {
-  title: 'Design System/UnderlineTabs',
+  title: 'Components/UnderlineTabs',
   component: UnderlineTabs,
   parameters: {
     layout: 'padded',
