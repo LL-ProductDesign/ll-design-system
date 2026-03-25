@@ -1,5 +1,4 @@
 import React from 'react';
-import { color } from './tokens';
 
 // Brand dot color — sourced directly from the Figma SVG asset (var(--fill-0)).
 // No exact match in the token scale; treated as a logo-specific brand constant.
@@ -37,8 +36,8 @@ const ASPECT = 90.47 / 20.2125; // ≈ 4.475
 // ─── Colour map ─────────────────────────────────────────────────────────────
 
 const THEME_COLORS: Record<LogoTheme, { wordmark: string; dot: string }> = {
-  default:  { wordmark: color['text-brand'],  dot: LOGO_DOT_COLOR },
-  inverted: { wordmark: color['text-invert'], dot: LOGO_DOT_COLOR },
+  default:  { wordmark: 'var(--text-brand)',  dot: LOGO_DOT_COLOR },
+  inverted: { wordmark: 'var(--text-invert)', dot: LOGO_DOT_COLOR },
 };
 
 // ─── Logo SVG ───────────────────────────────────────────────────────────────

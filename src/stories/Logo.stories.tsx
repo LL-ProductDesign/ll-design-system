@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { Logo } from './Logo';
-import { color } from './tokens';
 
 // Focus ring styles from Figma (interaction-colors/focus, drop-shadow 12px)
 const focusRingStyle: React.CSSProperties = {
-  border: `1px solid ${color['focus']}`,
-  boxShadow: '0px 1px 12px 0px rgba(2, 118, 177, 0.7)',
-  borderRadius: 4,
+  border: 'var(--border-focus)',
+  boxShadow: 'var(--shadow-focus)',
+  borderRadius: 'var(--border-radius-extra-small)',
 };
 
 const meta = {
@@ -52,7 +51,7 @@ export const ThemeInverted: Story = {
   name: 'Theme / Inverted (White)',
   decorators: [
     (Story) => (
-      <div style={{ padding: 32, background: color['bg-invert'], borderRadius: 8 }}>
+      <div style={{ padding: 32, background: 'var(--background-invert)', borderRadius: 'var(--border-radius-cards)' }}>
         <Story />
       </div>
     ),
@@ -65,7 +64,7 @@ export const ThemeInvertedOnBrand: Story = {
   name: 'Theme / Inverted on Brand',
   decorators: [
     (Story) => (
-      <div style={{ padding: 32, background: color['bg-brand'], borderRadius: 8 }}>
+      <div style={{ padding: 32, background: 'var(--background-brand)', borderRadius: 'var(--border-radius-cards)' }}>
         <Story />
       </div>
     ),
@@ -80,7 +79,7 @@ export const ThemeInvertedOnBrand: Story = {
 export const StateDefault: Story = {
   name: 'State / Default',
   render: () => (
-    <div style={{ padding: 16 }}>
+    <div style={{ padding: 'var(--spacing-medium)' }}>
       <Logo theme="default" size="md" />
     </div>
   ),
@@ -93,7 +92,7 @@ export const StateDefault: Story = {
 export const StateFocus: Story = {
   name: 'State / Focus',
   render: () => (
-    <div style={{ padding: 16, display: 'inline-flex', ...focusRingStyle }}>
+    <div style={{ padding: 'var(--spacing-medium)', display: 'inline-flex', ...focusRingStyle }}>
       <Logo theme="default" size="md" />
     </div>
   ),
@@ -124,10 +123,10 @@ export const SizeXL: Story = {
 export const AllSizes: Story = {
   name: 'Size / All Sizes',
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'flex-start' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-large)', alignItems: 'flex-start' }}>
       {(['sm', 'md', 'lg', 'xl'] as const).map((s) => (
-        <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-          <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#9ca3af', minWidth: 24 }}>{s}</span>
+        <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-medium)' }}>
+          <span style={{ fontFamily: 'monospace', fontSize: 11, color: 'var(--neutral-80)', minWidth: 24 }}>{s}</span>
           <Logo size={s} />
         </div>
       ))}
@@ -140,22 +139,22 @@ export const AllSizes: Story = {
 export const AllThemes: Story = {
   name: 'Theme / All Themes',
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderRadius: 8, overflow: 'hidden', border: `1px solid ${color['border-primary']}` }}>
-      <div style={{ padding: '24px 32px', background: color['bg-primary'], display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderRadius: 'var(--border-radius-cards)', overflow: 'hidden', border: 'var(--border-card)' }}>
+      <div style={{ padding: 'var(--spacing-large) var(--spacing-xl)', background: 'var(--background-primary)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Logo theme="default" size="lg" />
-        <span style={{ fontFamily: "'Fira Sans', sans-serif", fontSize: 11, color: color['text-secondary'] }}>default · bg-primary</span>
+        <span style={{ fontFamily: 'var(--font-family-base)', fontSize: 11, color: 'var(--text-secondary)' }}>default · bg-primary</span>
       </div>
-      <div style={{ padding: '24px 32px', background: color['bg-secondary'], display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ padding: 'var(--spacing-large) var(--spacing-xl)', background: 'var(--background-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Logo theme="default" size="lg" />
-        <span style={{ fontFamily: "'Fira Sans', sans-serif", fontSize: 11, color: color['text-secondary'] }}>default · bg-secondary</span>
+        <span style={{ fontFamily: 'var(--font-family-base)', fontSize: 11, color: 'var(--text-secondary)' }}>default · bg-secondary</span>
       </div>
-      <div style={{ padding: '24px 32px', background: color['bg-brand'], display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ padding: 'var(--spacing-large) var(--spacing-xl)', background: 'var(--background-brand)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Logo theme="inverted" size="lg" />
-        <span style={{ fontFamily: "'Fira Sans', sans-serif", fontSize: 11, color: 'rgba(255,255,255,0.7)' }}>inverted · bg-brand</span>
+        <span style={{ fontFamily: 'var(--font-family-base)', fontSize: 11, color: 'var(--text-invert)' }}>inverted · bg-brand</span>
       </div>
-      <div style={{ padding: '24px 32px', background: color['bg-invert'], display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ padding: 'var(--spacing-large) var(--spacing-xl)', background: 'var(--background-invert)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Logo theme="inverted" size="lg" />
-        <span style={{ fontFamily: "'Fira Sans', sans-serif", fontSize: 11, color: 'rgba(255,255,255,0.5)' }}>inverted · bg-invert</span>
+        <span style={{ fontFamily: 'var(--font-family-base)', fontSize: 11, color: 'var(--text-invert)' }}>inverted · bg-invert</span>
       </div>
     </div>
   ),
