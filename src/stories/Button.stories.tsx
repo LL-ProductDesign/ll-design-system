@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import React from 'react';
-import { LearnlightButton } from './LearnlightButton';
+import { LearnlightButton } from './Button';
 import { Icon, iconNames } from './Icons';
 import { buttonTokens } from './tokens';
 
